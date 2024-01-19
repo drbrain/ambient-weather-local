@@ -88,382 +88,386 @@ impl Into<String> for &Report {
 
         if let Some(aqi_pm25) = self.aqi_pm25 {
             metrics.push(format!(
-                "air_quality_pm25_index{{{station}, location=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
+                "air_quality_pm25_index{{{station}, sensor=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
             ));
         }
 
         if let Some(aqi_pm25) = self.aqi_pm25_24h {
             metrics.push(format!(
-                "air_quality_pm25_average_24h_index{{{station}, location=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
+                "air_quality_pm25_average_24h_index{{{station}, sensor=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
             ));
         }
 
         if let Some(aqi_pm25) = self.aqi_pm25_24h_aqin {
             metrics.push(format!(
-                "air_quality_pm25_average_24h_index{{{station}, location=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
+                "air_quality_pm25_average_24h_index{{{station}, sensor=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
             ));
         }
 
         if let Some(aqi_pm25) = self.aqi_pm25_aqin {
             metrics.push(format!(
-                "air_quality_pm25_index{{{station}, location=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
+                "air_quality_pm25_index{{{station}, sensor=\"indoor PM2.5\"}} {aqi_pm25} {timestamp}"
             ));
         }
 
         if let Some(barometric_pressure) = self.baromabsin {
             metrics.push(format!(
-                "barometric_pressure_inches_hg{{{station}, location=\"indoor sensor\", measurement=\"absolute\"}} {barometric_pressure} {timestamp}"
+                "barometric_pressure_inches_hg{{{station}, sensor=\"indoor\", measurement=\"absolute\"}} {barometric_pressure} {timestamp}"
             ));
         }
 
         if let Some(barometric_pressure) = self.baromrelin {
             metrics.push(format!(
-                "barometric_pressure_inches_hg{{{station}, location=\"indoor sensor\", measurement=\"relative\"}} {barometric_pressure} {timestamp}"
+                "barometric_pressure_inches_hg{{{station}, sensor=\"indoor\", measurement=\"relative\"}} {barometric_pressure} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt1 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 1\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 1\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt2 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 2\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 2\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt3 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 3\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 3\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt4 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 4\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 4\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt5 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 5\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 5\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt6 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 6\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 6\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt7 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 7\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 7\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt8 {
             metrics.push(format!(
-                "battery{{{station}, location=\"sensor 8\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"sensor 8\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt_25 {
             metrics.push(format!(
-                "battery{{{station}, location=\"indoor PM2.5\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"indoor PM2.5\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt_co2 {
             metrics.push(format!(
-                "battery{{{station}, location=\"indoor PM2.5\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"indoor PM2.5\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.batt_lightning {
             metrics.push(format!(
-                "battery{{{station}, location=\"lightning sensor\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"lightning\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battin {
             metrics.push(format!(
-                "battery{{{station}, location=\"indoor sensor\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"indoor\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battout {
             metrics.push(format!(
-                "battery{{{station}, location=\"weather station\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"weather station\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm1 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 1\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 1\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm2 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 2\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 2\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm3 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 3\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 3\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm4 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 4\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 4\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm5 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 5\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 5\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm6 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 6\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 6\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm7 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 7\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 7\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(battery) = self.battsm8 {
             metrics.push(format!(
-                "battery{{{station}, location=\"soil humidity 8\"}} {battery} {timestamp}"
+                "battery{{{station}, sensor=\"soil humidity 8\"}} {battery} {timestamp}"
             ));
         }
 
         if let Some(co2) = self.co2_in_24h_aqin {
             metrics.push(format!(
-                "co2_average_24h_ppm{{{station}, location=\"indoor PM2.5\"}} {co2} {timestamp}"
+                "co2_average_24h_ppm{{{station}, sensor=\"indoor PM2.5\"}} {co2} {timestamp}"
             ));
         }
 
         if let Some(co2) = self.co2_in_aqin {
             metrics.push(format!(
-                "co2_ppm{{{station}, location=\"indoor PM2.5\"}} {co2} {timestamp}"
+                "co2_ppm{{{station}, sensor=\"indoor PM2.5\"}} {co2} {timestamp}"
             ));
         }
 
         if let Some(direction) = self.winddir {
             metrics.push(format!(
-                "wind_direction_degrees{{{station}}} {direction} {timestamp}"
+                "wind_direction_degrees{{{station}, sensor=\"weather station\"}} {direction} {timestamp}"
             ));
         }
 
         if let Some(direction) = self.winddir_avg10m {
             metrics.push(format!(
-                "wind_direction_average_10m_degrees{{{station}}} {direction} {timestamp}"
+                "wind_direction_average_10m_degrees{{{station}, sensor=\"weather station\"}} {direction} {timestamp}"
             ));
         }
 
         if let Some(gust) = self.windgustmph {
             metrics.push(format!(
-                "wind_gust_mph{{{station}, period=\"instant\"}} {gust} {timestamp}"
+                "wind_gust_mph{{{station}, sensor=\"weather station\", period=\"instant\"}} {gust} {timestamp}"
             ));
         }
 
         if let Some(gust) = self.maxdailygust {
             metrics.push(format!(
-                "wind_gust_mph{{{station}, period=\"max daily\"}} {gust} {timestamp}"
+                "wind_gust_mph{{{station}, sensor=\"weather station\", period=\"max daily\"}} {gust} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.humidity {
             metrics.push(format!(
-                "humidity_relative{{{station}, location=\"weather station\"}} {humidity} {timestamp}"
+                "humidity_relative{{{station}, sensor=\"weather station\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.humidityin {
             metrics.push(format!(
-                "humidity_relative{{{station}, location=\"indoor sensor\"}} {humidity} {timestamp}"
+                "humidity_relative{{{station}, sensor=\"indoor\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.pm_in_humidity_aqin {
             metrics.push(format!(
-                "humidity_relative{{{station}, location=\"indoor PM2.5\"}} {humidity} {timestamp}"
+                "humidity_relative{{{station}, sensor=\"indoor PM2.5\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(strikes) = self.lightning_day {
             metrics.push(format!(
-                "lightning_strikes{{{station}}} {strikes} {timestamp}"
+                "lightning_strikes{{{station}, sensor=\"lightning\"}} {strikes} {timestamp}"
             ));
         }
 
         if let Some(pm10) = self.pm10_in_24h_aqin {
             metrics.push(format!(
-                "pm10_average_24h_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm10} {timestamp}"
+                "pm10_average_24h_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm10} {timestamp}"
             ));
         }
 
         if let Some(pm10) = self.pm10_in_aqin {
             metrics.push(format!(
-                "pm10_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm10} {timestamp}"
+                "pm10_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm10} {timestamp}"
             ));
         }
 
         if let Some(pm25) = self.pm25 {
             metrics.push(format!(
-                "pm25_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm25} {timestamp}"
+                "pm25_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm25} {timestamp}"
             ));
         }
 
         if let Some(pm25) = self.pm25_24h {
             metrics.push(format!(
-                "pm25_average_24h_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm25} {timestamp}"
+                "pm25_average_24h_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm25} {timestamp}"
             ));
         }
 
         if let Some(pm25) = self.pm25_in_24h_aqin {
             metrics.push(format!(
-                "pm25_average_24h_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm25} {timestamp}"
+                "pm25_average_24h_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm25} {timestamp}"
             ));
         }
 
         if let Some(pm25) = self.pm25_in_aqin {
             metrics.push(format!(
-                "pm25_micrograms_per_cubic_meter{{{station}, location=\"indoor PM2.5\"}} {pm25} {timestamp}"
+                "pm25_micrograms_per_cubic_meter{{{station}, sensor=\"indoor PM2.5\"}} {pm25} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.dailyrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"day\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"day\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.eventrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"event\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"event\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.hourlyrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"hour\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"hour\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.monthlyrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"month\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"month\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.weeklyrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"week\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"week\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(rain) = self.yearlyrainin {
             metrics.push(format!(
-                "rain_inches{{{station}, period=\"year\"}} {rain} {timestamp}"
+                "rain_inches{{{station}, sensor=\"rain\", period=\"year\"}} {rain} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum1 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 1\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 1\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum2 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 2\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 2\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum3 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 3\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 3\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum4 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 4\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 4\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum5 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 5\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 5\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum6 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 6\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 6\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum7 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 7\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 7\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(humidity) = self.soilhum8 {
             metrics.push(format!(
-                "soil_humidity{{{station}, sensor=\"sensor 8\"}} {humidity} {timestamp}"
+                "soil_humidity{{{station}, sensor=\"soil humidity 8\"}} {humidity} {timestamp}"
             ));
         }
 
         if let Some(solar_radiation) = self.solarradiation {
             metrics.push(format!(
-                "solar_radiation_watts_per_square_meter{{{station}}} {solar_radiation} {timestamp}"
+                "solar_radiation_watts_per_square_meter{{{station}, sensor=\"weather station\"}} {solar_radiation} {timestamp}"
             ));
         }
 
         if let Some(speed) = self.windspeedmph {
-            metrics.push(format!("wind_speed_mph{{station}} {speed} {timestamp}"));
+            metrics.push(format!(
+                "wind_speed_mph{{{station}, sensor=\"weather station\"}} {speed} {timestamp}"
+            ));
         }
 
         if let Some(speed) = self.windspdmph_avg10m {
             metrics.push(format!(
-                "wind_speed_average_10m_mph{{station}} {speed} {timestamp}"
+                "wind_speed_average_10m_mph{{{station}, sensor=\"weather station\"}} {speed} {timestamp}"
             ));
         }
 
         if let Some(temperature) = self.pm_in_temp_aqin {
             metrics.push(format!(
-                "temperature_farhenheit{{{station}, location=\"indoor PM2.5\"}} {temperature} {timestamp}"
+                "temperature_farhenheit{{{station}, sensor=\"indoor PM2.5\"}} {temperature} {timestamp}"
             ));
         }
 
         if let Some(temperature) = self.tempf {
             metrics.push(format!(
-                "temperature_farhenheit{{{station}, location=\"weather station\"}} {temperature} {timestamp}"
+                "temperature_farhenheit{{{station}, sensor=\"weather station\"}} {temperature} {timestamp}"
             ));
         }
 
         if let Some(temperature) = self.tempinf {
             metrics.push(format!(
-                "temperature_farhenheit{{{station}, location=\"indoor sensor\"}} {temperature} {timestamp}"
+                "temperature_farhenheit{{{station}, sensor=\"indoor\"}} {temperature} {timestamp}"
             ));
         }
 
         if let Some(uv) = self.uv {
-            metrics.push(format!("uv_index{{{station}}} {uv} {timestamp}"));
+            metrics.push(format!(
+                "uv_index{{{station}, sensor=\"weather station\"}} {uv} {timestamp}"
+            ));
         }
 
         metrics.join("\n")
