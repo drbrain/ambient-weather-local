@@ -1,0 +1,12 @@
+[package]
+name = "ambient-weather-receiver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4"
+serde = { version = "1", features = [ "derive" ] }
+time = { version = "0.3", features = [ "parsing", "serde" ] }
+tracing = "0.1"
+tracing-actix-web = "0.7"
+env_logger = "0.9"
