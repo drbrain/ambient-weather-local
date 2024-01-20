@@ -346,7 +346,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "humidity_relative",
                 format!("{station}, sensor=\"weather station\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -355,7 +355,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "humidity_relative",
                 format!("{station}, sensor=\"indoor\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -364,7 +364,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "humidity_relative",
                 format!("{station}, sensor=\"indoor PM2.5\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -380,7 +380,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm10) = report.pm10_in_24h_aqin {
             metrics.gauge(
-                "pm10_average_24h_micrograms_per_cubic_meter",
+                "pm10_average_24h_concentration",
                 format!("{station}, sensor=\"indoor PM2.5\""),
                 pm10,
                 timestamp,
@@ -389,7 +389,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm10) = report.pm10_in_aqin {
             metrics.gauge(
-                "pm10_micrograms_per_cubic_meter",
+                "pm10_concentration",
                 format!("{station}, sensor=\"indoor PM2.5\""),
                 pm10,
                 timestamp,
@@ -398,7 +398,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25 {
             metrics.gauge(
-                "pm25_micrograms_per_cubic_meter",
+                "pm25_concentration",
                 format!("{station}, sensor=\"outdoor PM2.5\""),
                 pm25,
                 timestamp,
@@ -407,7 +407,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25_24h {
             metrics.gauge(
-                "pm25_average_24h_micrograms_per_cubic_meter",
+                "pm25_average_24h_concentration",
                 format!("{station}, sensor=\"outdoor PM2.5\""),
                 pm25,
                 timestamp,
@@ -416,7 +416,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25_in_24h_aqin {
             metrics.gauge(
-                "pm25_average_24h_micrograms_per_cubic_meter",
+                "pm25_average_24h_concentration",
                 format!("{station}, sensor=\"indoor PM2.5\""),
                 pm25,
                 timestamp,
@@ -425,7 +425,7 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25_in_aqin {
             metrics.gauge(
-                "pm25_micrograms_per_cubic_meter",
+                "pm25_concentration",
                 format!("{station}, sensor=\"indoor PM2.5\""),
                 pm25,
                 timestamp,
@@ -490,7 +490,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 1\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -499,7 +499,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 2\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -508,7 +508,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 3\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -517,7 +517,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 4\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -526,7 +526,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 5\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -535,7 +535,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 6\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -544,7 +544,7 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 7\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
@@ -553,14 +553,14 @@ impl From<&Report> for Metrics {
             metrics.gauge(
                 "soil_humidity",
                 format!("{station}, sensor=\"soil humidity 8\""),
-                humidity,
+                humidity / 100.0,
                 timestamp,
             );
         }
 
         if let Some(solar_radiation) = report.solarradiation {
             metrics.gauge(
-                "solar_radiation_watts_per_square_meter",
+                "solar_radiation",
                 format!("{station}, sensor=\"weather station\""),
                 solar_radiation,
                 timestamp,
@@ -587,7 +587,7 @@ impl From<&Report> for Metrics {
 
         if let Some(temperature) = report.pm_in_temp_aqin {
             metrics.gauge(
-                "temperature_farhenheit",
+                "temperature_fahrenheit",
                 format!("{station}, sensor=\"indoor PM2.5\""),
                 temperature,
                 timestamp,
@@ -596,7 +596,7 @@ impl From<&Report> for Metrics {
 
         if let Some(temperature) = report.tempf {
             metrics.gauge(
-                "temperature_farhenheit",
+                "temperature_fahrenheit",
                 format!("{station}, sensor=\"weather station\""),
                 temperature,
                 timestamp,
@@ -605,7 +605,7 @@ impl From<&Report> for Metrics {
 
         if let Some(temperature) = report.tempinf {
             metrics.gauge(
-                "temperature_farhenheit",
+                "temperature_fahrenheit",
                 format!("{station}, sensor=\"indoor\""),
                 temperature,
                 timestamp,

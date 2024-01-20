@@ -1,0 +1,35 @@
+enum MetricType {
+    Gauge,
+    Info,
+}
+
+pub struct Descriptor {
+    name: String,
+    metric_type: MetricType,
+    description: String,
+    unit: Option<String>,
+}
+
+impl Descriptor {
+    pub fn gauge(
+        name: impl Into<String>,
+        description: impl Into<String>,
+        unit: impl Into<String>,
+    ) -> Self {
+        Self {
+            name: name.into(),
+            metric_type: MetricType::Gauge,
+            description: description.into(),
+            unit: Some(unit.into()),
+        }
+    }
+
+    pub fn info(name: impl Into<String>, description: impl Into<String>) -> Self {
+        Self {
+            name: name.into(),
+            metric_type: MetricType::Info,
+            description: description.into(),
+            unit: None,
+        }
+    }
+}

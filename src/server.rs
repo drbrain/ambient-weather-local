@@ -17,7 +17,7 @@ impl Server {
     pub fn new(address: SocketAddr) -> Self {
         Self {
             address,
-            reports: Data::new(Reports::default()),
+            reports: Data::new(Reports::new()),
         }
     }
 

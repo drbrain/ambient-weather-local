@@ -1,4 +1,5 @@
 mod ambient_weather_report;
+mod descriptor;
 mod gauge;
 mod info;
 mod metrics;
@@ -6,7 +7,10 @@ mod report;
 mod reports;
 mod server;
 
-pub use crate::{gauge::Gauge, info::Info, metrics::Metrics, report::Report, reports::Reports};
+pub use crate::{
+    descriptor::Descriptor, gauge::Gauge, info::Info, metrics::Metrics, report::Report,
+    reports::Reports,
+};
 use env_logger::Env;
 use server::Server;
 
