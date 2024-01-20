@@ -1,8 +1,12 @@
 mod ambient_weather_report;
+mod gauge;
+mod info;
+mod metrics;
 mod report;
 mod reports;
 
-use crate::{ambient_weather_report::AmbientWeatherReport, reports::Reports};
+use crate::ambient_weather_report::AmbientWeatherReport;
+pub use crate::{gauge::Gauge, info::Info, metrics::Metrics, report::Report, reports::Reports};
 use actix_web::{get, middleware::Logger, web, App, HttpResponse, HttpServer, Responder};
 use env_logger::Env;
 use std::ops::Deref;
@@ -33,7 +37,7 @@ async fn ambient_weather_upload(
 }
 
 #[get("/metrics")]
-async fn metrics(reports: web::Data<Reports>) -> impl Responder {
+async fn get_metrics(reports: web::Data<Reports>) -> impl Responder {
     HttpResponse::Ok().body(reports.metrics())
 }
 
@@ -48,7 +52,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(reports.clone())
             .service(root)
             .service(ambient_weather_upload)
-            .service(metrics)
+            .service(get_metrics)
             .wrap(Logger::default())
     })
     .bind("0.0.0.0:8080")?
