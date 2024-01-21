@@ -1,26 +1,27 @@
-#[derive(Debug)]
+use crate::{Encoder, Metric};
+
+#[derive(Clone, Debug)]
 pub struct Info {
-    name: String,
-    labels: String,
+    metric: Metric,
     timestamp: i64,
 }
 
 impl Info {
     pub fn new(name: impl Into<String>, labels: impl Into<String>, timestamp: i64) -> Self {
-        Self {
-            name: name.into(),
-            labels: labels.into(),
-            timestamp,
-        }
+        let metric = Metric::new(name, labels);
+
+        Self { metric, timestamp }
     }
-}
 
-impl Into<String> for &Info {
-    fn into(self) -> String {
-        let name = &self.name;
-        let labels = &self.labels;
-        let timestamp = self.timestamp;
+    pub fn encode(&self, encoder: &mut Encoder) -> Result<(), std::fmt::Error> {
+        encoder.encode_info(self)
+    }
 
-        format!("{name}{{{labels}}} 1 {timestamp}")
+    pub fn metric(&self) -> &Metric {
+        &self.metric
+    }
+
+    pub fn timestamp(&self) -> i64 {
+        self.timestamp
     }
 }

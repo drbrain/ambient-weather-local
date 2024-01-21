@@ -24,6 +24,14 @@ impl Metrics {
 
         self.infos.push(info);
     }
+
+    pub fn gauges(&self) -> &Vec<Gauge> {
+        &self.gauges
+    }
+
+    pub fn infos(&self) -> &Vec<Info> {
+        &self.infos
+    }
 }
 
 impl From<Report> for Metrics {
@@ -622,30 +630,5 @@ impl From<&Report> for Metrics {
         }
 
         metrics
-    }
-}
-
-impl Into<String> for Metrics {
-    fn into(self) -> String {
-        (&self).into()
-    }
-}
-
-impl Into<String> for &Metrics {
-    fn into(self) -> String {
-        let infos = self
-            .infos
-            .iter()
-            .map(|info| info.into())
-            .collect::<Vec<String>>()
-            .join("\n");
-        let gauges = self
-            .gauges
-            .iter()
-            .map(|info| info.into())
-            .collect::<Vec<String>>()
-            .join("\n");
-
-        format!("{infos}\n{gauges}")
     }
 }

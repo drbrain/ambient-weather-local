@@ -1,3 +1,5 @@
+use crate::Encoder;
+
 enum MetricType {
     Gauge,
     Info,
@@ -31,5 +33,24 @@ impl Descriptor {
             description: description.into(),
             unit: None,
         }
+    }
+
+    pub fn description(&self) -> &str {
+        &self.description
+    }
+
+    pub fn encode(&self, encoder: &mut Encoder) -> Result<(), std::fmt::Error> {
+        encoder.encode_descriptor(self)
+    }
+
+    pub fn name(&self) -> String {
+        match self.metric_type {
+            MetricType::Gauge => self.name.clone(),
+            MetricType::Info => format!("{}_info", self.name),
+        }
+    }
+
+    pub fn unit(&self) -> Option<&str> {
+        self.unit.as_deref()
     }
 }

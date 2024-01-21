@@ -62,5 +62,8 @@ async fn ambient_weather_upload(
 
 #[get("/metrics")]
 async fn get_metrics(reports: Data<Reports>) -> impl Responder {
-    HttpResponse::Ok().body(reports.metrics())
+    match reports.encode() {
+        Ok(report) => HttpResponse::Ok().body(report),
+        Err(_) => HttpResponse::InternalServerError().into(),
+    }
 }

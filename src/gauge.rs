@@ -1,7 +1,8 @@
-#[derive(Debug)]
+use crate::{Encoder, Metric};
+
+#[derive(Clone, Debug)]
 pub struct Gauge {
-    name: String,
-    labels: String,
+    metric: Metric,
     value: f64,
     timestamp: i64,
 }
@@ -13,29 +14,27 @@ impl Gauge {
         value: f64,
         timestamp: i64,
     ) -> Self {
+        let metric = Metric::new(name, labels);
         Self {
-            name: name.into(),
-            labels: labels.into(),
+            metric,
             value,
             timestamp,
         }
     }
 
-    pub fn encode(&self) -> String {
-        format!(
-            "{}{{{}}} {} {}\n",
-            self.name, self.labels, self.value, self.timestamp
-        )
+    pub fn encode(&self, encoder: &mut Encoder) -> Result<(), std::fmt::Error> {
+        encoder.encode_gauge(self)
     }
-}
 
-impl Into<String> for &Gauge {
-    fn into(self) -> String {
-        let name = &self.name;
-        let labels = &self.labels;
-        let value = self.value;
-        let timestamp = self.timestamp;
+    pub fn metric(&self) -> &Metric {
+        &self.metric
+    }
 
-        format!("{name}{{{labels}}} {value} {timestamp}")
+    pub fn timestamp(&self) -> i64 {
+        self.timestamp
+    }
+
+    pub fn value(&self) -> f64 {
+        self.value
     }
 }

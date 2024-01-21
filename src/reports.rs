@@ -1,5 +1,8 @@
-use crate::{report::Report, Descriptor, Metrics};
-use std::{collections::VecDeque, sync::RwLock};
+use crate::{report::Report, Descriptor, Encoder, Gauge, Info, Metrics};
+use std::{
+    collections::{HashMap, VecDeque},
+    sync::RwLock,
+};
 
 /// Minimum interval for Ambient weather devices is 16 seconds
 ///
@@ -101,13 +104,45 @@ impl Reports {
         }
     }
 
-    pub fn metrics(&self) -> String {
-        let reports = self.reports.read().unwrap();
+    pub fn encode(&self) -> Result<String, std::fmt::Error> {
+        let mut buf = String::new();
+        let mut encoder = Encoder::new(&mut buf);
 
-        reports
-            .iter()
-            .map(|report| report.into())
-            .collect::<Vec<String>>()
-            .join("\n")
+        let mut gauge_map: HashMap<String, Vec<Gauge>> = HashMap::default();
+        let mut info_map: HashMap<String, Vec<Info>> = HashMap::default();
+
+        for report in self.reports.read().unwrap().iter() {
+            for gauge in report.gauges().iter() {
+                let list = gauge_map.entry(gauge.metric().name().into()).or_default();
+                list.push(gauge.clone());
+            }
+
+            for info in report.infos().iter() {
+                let list = info_map.entry(info.metric().name().into()).or_default();
+                list.push(info.clone());
+            }
+        }
+
+        for descriptor in &self.descriptors {
+            encoder.encode_descriptor(descriptor)?;
+
+            if let Some(infos) = info_map.get_mut(&descriptor.name().to_string()) {
+                infos.sort_by_cached_key(|info| info.metric().clone());
+
+                for info in infos {
+                    encoder.encode_info(info)?;
+                }
+            };
+
+            if let Some(gauges) = gauge_map.get_mut(&descriptor.name().to_string()) {
+                gauges.sort_by_cached_key(|gauge| gauge.metric().clone());
+
+                for gauge in gauges {
+                    encoder.encode_gauge(gauge)?;
+                }
+            };
+        }
+
+        Ok(buf)
     }
 }
