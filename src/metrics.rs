@@ -14,7 +14,7 @@ impl Metrics {
         value: f64,
         timestamp: i64,
     ) {
-        let gauge = Gauge::new(name, labels, value, timestamp);
+        let gauge = Gauge::new_with_timestamp(name, labels, value, timestamp);
 
         self.gauges.push(gauge);
     }

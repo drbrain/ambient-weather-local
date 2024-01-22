@@ -2,6 +2,7 @@ use crate::{report::Report, Descriptor, Encoder, Gauge, Info, Metrics};
 use std::{
     collections::{HashMap, VecDeque},
     sync::RwLock,
+    time::Instant,
 };
 
 /// Minimum interval for Ambient weather devices is 16 seconds
@@ -105,6 +106,8 @@ impl Reports {
     }
 
     pub fn encode(&self) -> Result<String, std::fmt::Error> {
+        let start = Instant::now();
+
         let mut buf = String::new();
         let mut encoder = Encoder::new(&mut buf);
 
@@ -142,6 +145,15 @@ impl Reports {
                 }
             };
         }
+
+        let name = "local_ambient_weather_scrape_duration_seconds";
+        let scrape_duration_descriptor = Descriptor::gauge(name, "Scrape duration", "seconds");
+        encoder.encode_descriptor(&scrape_duration_descriptor)?;
+
+        let scrape_duration = start.elapsed().as_secs_f64();
+        let scrape_duration = Gauge::new(name, "", scrape_duration);
+
+        encoder.encode_gauge(&scrape_duration)?;
 
         Ok(buf)
     }
