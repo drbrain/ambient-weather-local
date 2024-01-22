@@ -1,10 +1,14 @@
 [package]
 name = "ambient-weather-local"
 version = "0.1.0"
+authors = [
+  "Eric Hodel <drbrain@segment7.net>"
+]
 edition = "2021"
 
 [dependencies]
 actix-web = "4"
+clap = { version = "4.4", features = [ "derive" ] }
 env_logger = "0.9"
 serde = { version = "1", features = [ "derive" ] }
 time = { version = "0.3", features = [ "parsing", "serde" ] }

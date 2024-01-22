@@ -1,4 +1,5 @@
 mod ambient_weather_report;
+mod args;
 mod descriptor;
 mod encoder;
 mod gauge;
@@ -10,9 +11,10 @@ mod reports;
 mod server;
 
 pub use crate::{
-    descriptor::Descriptor, encoder::Encoder, gauge::Gauge, info::Info, metric::Metric,
+    args::Args, descriptor::Descriptor, encoder::Encoder, gauge::Gauge, info::Info, metric::Metric,
     metrics::Metrics, report::Report, reports::Reports,
 };
+use clap::Parser;
 use env_logger::Env;
 use server::Server;
 
@@ -20,9 +22,9 @@ use server::Server;
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("info"));
 
-    let address = "0.0.0.0:9111".parse().unwrap();
+    let args = Args::parse();
 
-    Server::new(address).start().await?;
+    Server::new(args.address).start().await?;
 
     Ok(())
 }
