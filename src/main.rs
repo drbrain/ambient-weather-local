@@ -20,7 +20,7 @@ use server::Server;
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("info"));
 
-    let address = "0.0.0.0:8080".parse().unwrap();
+    let address = "0.0.0.0:9111".parse().unwrap();
 
     Server::new(address).start().await?;
 
