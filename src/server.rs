@@ -1,4 +1,4 @@
-use crate::{ambient_weather_report::AmbientWeatherReport, Reports};
+use crate::{ambient_weather_report::AmbientWeatherReport, Args, Reports};
 use actix_web::{
     get,
     middleware::Logger,
@@ -14,10 +14,10 @@ pub struct Server {
 }
 
 impl Server {
-    pub fn new(address: SocketAddr) -> Self {
+    pub fn new(args: Args) -> Self {
         Self {
-            address,
-            reports: Data::new(Reports::new()),
+            address: args.address,
+            reports: Data::new(Reports::new(args.max_reports)),
         }
     }
 

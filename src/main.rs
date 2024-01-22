@@ -24,7 +24,7 @@ async fn main() -> std::io::Result<()> {
 
     let args = Args::parse();
 
-    Server::new(args.address).start().await?;
+    Server::new(args).start().await?;
 
     Ok(())
 }

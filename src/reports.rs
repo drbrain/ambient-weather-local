@@ -5,18 +5,14 @@ use std::{
     time::Instant,
 };
 
-/// Minimum interval for Ambient weather devices is 16 seconds
-///
-/// This holds about 5 minutes of reports with the minimum interval
-const MAX_REPORTS: usize = 20;
-
 pub struct Reports {
+    max_reports: usize,
     reports: RwLock<VecDeque<Metrics>>,
     descriptors: Vec<Descriptor>,
 }
 
 impl Reports {
-    pub fn new() -> Self {
+    pub fn new(max_reports: usize) -> Self {
         let descriptors = vec![
             Descriptor::info("weather_station_info", "Weather station information"),
             Descriptor::gauge(
@@ -66,6 +62,7 @@ impl Reports {
         ];
 
         Self {
+            max_reports,
             reports: RwLock::default(),
             descriptors,
         }
@@ -78,7 +75,7 @@ impl Reports {
 
         reports.push_back(metrics);
 
-        if reports.len() > MAX_REPORTS {
+        if reports.len() > self.max_reports {
             reports.pop_front();
         }
     }
