@@ -56,7 +56,7 @@ impl From<&Report> for Metrics {
         if let Some(aqi_pm25) = report.aqi_pm25 {
             metrics.gauge(
                 "air_quality_pm25_index",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"outdoor\""),
                 aqi_pm25,
                 timestamp,
             );
@@ -64,8 +64,8 @@ impl From<&Report> for Metrics {
 
         if let Some(aqi_pm25) = report.aqi_pm25_24h {
             metrics.gauge(
-                "air_quality_pm25_average_24h_index",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                "air_quality_pm25_index",
+                format!("{station}, period=\"24h average\", location=\"outdoor\""),
                 aqi_pm25,
                 timestamp,
             );
@@ -73,8 +73,8 @@ impl From<&Report> for Metrics {
 
         if let Some(aqi_pm25) = report.aqi_pm25_24h_aqin {
             metrics.gauge(
-                "air_quality_pm25_average_24h_index",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                "air_quality_pm25_index",
+                format!("{station}, period=\"24h average\", location=\"indoor\""),
                 aqi_pm25,
                 timestamp,
             );
@@ -83,7 +83,7 @@ impl From<&Report> for Metrics {
         if let Some(aqi_pm25) = report.aqi_pm25_aqin {
             metrics.gauge(
                 "air_quality_pm25_index",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"indoor\""),
                 aqi_pm25,
                 timestamp,
             );
@@ -92,7 +92,7 @@ impl From<&Report> for Metrics {
         if let Some(barometric_pressure) = report.baromabsin {
             metrics.gauge(
                 "barometric_pressure_inches_hg",
-                format!("{station}, sensor=\"indoor\", measurement=\"absolute\""),
+                format!("{station}, location=\"indoor\", measurement=\"absolute\""),
                 barometric_pressure,
                 timestamp,
             );
@@ -101,7 +101,7 @@ impl From<&Report> for Metrics {
         if let Some(barometric_pressure) = report.baromrelin {
             metrics.gauge(
                 "barometric_pressure_inches_hg",
-                format!("{station}, sensor=\"indoor\", measurement=\"relative\""),
+                format!("{station}, location=\"indoor\", measurement=\"relative\""),
                 barometric_pressure,
                 timestamp,
             );
@@ -110,7 +110,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt1 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 1\""),
+                format!("{station}, device=\"sensor 1\""),
                 battery,
                 timestamp,
             );
@@ -119,7 +119,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt2 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 2\""),
+                format!("{station}, device=\"sensor 2\""),
                 battery,
                 timestamp,
             );
@@ -128,7 +128,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt3 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 3\""),
+                format!("{station}, device=\"sensor 3\""),
                 battery,
                 timestamp,
             );
@@ -137,7 +137,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt4 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 4\""),
+                format!("{station}, device=\"sensor 4\""),
                 battery,
                 timestamp,
             );
@@ -146,7 +146,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt5 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 5\""),
+                format!("{station}, device=\"sensor 5\""),
                 battery,
                 timestamp,
             );
@@ -155,7 +155,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt6 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 6\""),
+                format!("{station}, device=\"sensor 6\""),
                 battery,
                 timestamp,
             );
@@ -164,7 +164,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt7 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 7\""),
+                format!("{station}, device=\"sensor 7\""),
                 battery,
                 timestamp,
             );
@@ -173,7 +173,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt8 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"sensor 8\""),
+                format!("{station}, device=\"sensor 8\""),
                 battery,
                 timestamp,
             );
@@ -182,7 +182,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt_25 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"outdoor PM2.5\""),
+                format!("{station}, device=\"outdoor PM2.5\""),
                 battery,
                 timestamp,
             );
@@ -191,7 +191,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt_co2 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, device=\"AQIN\""),
                 battery,
                 timestamp,
             );
@@ -200,7 +200,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.batt_lightning {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"lightning\""),
+                format!("{station}, device=\"lightning\""),
                 battery,
                 timestamp,
             );
@@ -209,7 +209,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battin {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"indoor\""),
+                format!("{station}, device=\"indoor\""),
                 battery,
                 timestamp,
             );
@@ -218,7 +218,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battout {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}, device=\"weather station\""),
                 battery,
                 timestamp,
             );
@@ -227,7 +227,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm1 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 1\""),
+                format!("{station}, device=\"soil humidity 1\""),
                 battery,
                 timestamp,
             );
@@ -236,7 +236,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm2 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 2\""),
+                format!("{station}, device=\"soil humidity 2\""),
                 battery,
                 timestamp,
             );
@@ -245,7 +245,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm3 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 3\""),
+                format!("{station}, device=\"soil humidity 3\""),
                 battery,
                 timestamp,
             );
@@ -254,7 +254,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm4 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 4\""),
+                format!("{station}, device=\"soil humidity 4\""),
                 battery,
                 timestamp,
             );
@@ -263,7 +263,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm5 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 5\""),
+                format!("{station}, device=\"soil humidity 5\""),
                 battery,
                 timestamp,
             );
@@ -272,7 +272,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm6 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 6\""),
+                format!("{station}, device=\"soil humidity 6\""),
                 battery,
                 timestamp,
             );
@@ -281,7 +281,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm7 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 7\""),
+                format!("{station}, device=\"soil humidity 7\""),
                 battery,
                 timestamp,
             );
@@ -290,7 +290,7 @@ impl From<&Report> for Metrics {
         if let Some(battery) = report.battsm8 {
             metrics.gauge(
                 "battery",
-                format!("{station}, sensor=\"soil humidity 8\""),
+                format!("{station}, device=\"soil humidity 8\""),
                 battery,
                 timestamp,
             );
@@ -298,8 +298,8 @@ impl From<&Report> for Metrics {
 
         if let Some(co2) = report.co2_in_24h_aqin {
             metrics.gauge(
-                "co2_average_24h_ppm",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                "co2_ppm",
+                format!("{station}, period=\"24h average\", location=\"indoor\""),
                 co2,
                 timestamp,
             );
@@ -308,7 +308,7 @@ impl From<&Report> for Metrics {
         if let Some(co2) = report.co2_in_aqin {
             metrics.gauge(
                 "co2_ppm",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"indoor\""),
                 co2,
                 timestamp,
             );
@@ -317,7 +317,7 @@ impl From<&Report> for Metrics {
         if let Some(direction) = report.winddir {
             metrics.gauge(
                 "wind_degrees",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}, period=\"instant\""),
                 direction,
                 timestamp,
             );
@@ -325,8 +325,8 @@ impl From<&Report> for Metrics {
 
         if let Some(direction) = report.winddir_avg10m {
             metrics.gauge(
-                "wind_average_10m_degrees",
-                format!("{station}, sensor=\"weather station\""),
+                "wind_degrees",
+                format!("{station}, period=\"10m average\""),
                 direction,
                 timestamp,
             );
@@ -335,7 +335,7 @@ impl From<&Report> for Metrics {
         if let Some(speed) = report.windgustmph {
             metrics.gauge(
                 "wind_gust_mph",
-                format!("{station}, sensor=\"weather station\", period=\"instant\""),
+                format!("{station}, period=\"instant\""),
                 speed,
                 timestamp,
             );
@@ -344,7 +344,7 @@ impl From<&Report> for Metrics {
         if let Some(speed) = report.maxdailygust {
             metrics.gauge(
                 "wind_gust_mph",
-                format!("{station}, sensor=\"weather station\", period=\"max daily\""),
+                format!("{station}, period=\"max daily\""),
                 speed,
                 timestamp,
             );
@@ -353,7 +353,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.humidity {
             metrics.gauge(
                 "humidity_relative",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}, location=\"outdoor\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -362,7 +362,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.humidityin {
             metrics.gauge(
                 "humidity_relative",
-                format!("{station}, sensor=\"indoor\""),
+                format!("{station}, location=\"indoor\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -371,7 +371,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.pm_in_humidity_aqin {
             metrics.gauge(
                 "humidity_relative",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, location=\"indoor AQIN\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -380,7 +380,7 @@ impl From<&Report> for Metrics {
         if let Some(strikes) = report.lightning_day {
             metrics.gauge(
                 "lightning_strikes",
-                format!("{station}, sensor=\"lightning\""),
+                format!("{station}"),
                 strikes,
                 timestamp,
             );
@@ -388,8 +388,8 @@ impl From<&Report> for Metrics {
 
         if let Some(pm10) = report.pm10_in_24h_aqin {
             metrics.gauge(
-                "pm10_average_24h_concentration",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                "pm10_concentration",
+                format!("{station}, period=\"24h average\", location=\"indoor\""),
                 pm10,
                 timestamp,
             );
@@ -398,7 +398,7 @@ impl From<&Report> for Metrics {
         if let Some(pm10) = report.pm10_in_aqin {
             metrics.gauge(
                 "pm10_concentration",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"indoor\""),
                 pm10,
                 timestamp,
             );
@@ -407,7 +407,7 @@ impl From<&Report> for Metrics {
         if let Some(pm25) = report.pm25 {
             metrics.gauge(
                 "pm25_concentration",
-                format!("{station}, sensor=\"outdoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"outdoor\""),
                 pm25,
                 timestamp,
             );
@@ -415,8 +415,8 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25_24h {
             metrics.gauge(
-                "pm25_average_24h_concentration",
-                format!("{station}, sensor=\"outdoor PM2.5\""),
+                "pm25_concentration",
+                format!("{station}, period=\"24h average\", location=\"outdoor\""),
                 pm25,
                 timestamp,
             );
@@ -424,8 +424,8 @@ impl From<&Report> for Metrics {
 
         if let Some(pm25) = report.pm25_in_24h_aqin {
             metrics.gauge(
-                "pm25_average_24h_concentration",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                "pm25_concentration",
+                format!("{station}, period=\"24h average\", location=\"indoor\""),
                 pm25,
                 timestamp,
             );
@@ -434,7 +434,7 @@ impl From<&Report> for Metrics {
         if let Some(pm25) = report.pm25_in_aqin {
             metrics.gauge(
                 "pm25_concentration",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, period=\"instant\", location=\"indoor\""),
                 pm25,
                 timestamp,
             );
@@ -443,7 +443,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.dailyrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"day\""),
+                format!("{station}, period=\"day\""),
                 rain,
                 timestamp,
             );
@@ -452,7 +452,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.eventrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"event\""),
+                format!("{station}, period=\"event\""),
                 rain,
                 timestamp,
             );
@@ -461,7 +461,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.hourlyrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"hour\""),
+                format!("{station}, period=\"hour\""),
                 rain,
                 timestamp,
             );
@@ -470,7 +470,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.monthlyrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"month\""),
+                format!("{station}, period=\"month\""),
                 rain,
                 timestamp,
             );
@@ -479,7 +479,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.weeklyrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"week\""),
+                format!("{station}, period=\"week\""),
                 rain,
                 timestamp,
             );
@@ -488,7 +488,7 @@ impl From<&Report> for Metrics {
         if let Some(rain) = report.yearlyrainin {
             metrics.gauge(
                 "rain_inches",
-                format!("{station}, sensor=\"rain\", period=\"year\""),
+                format!("{station}, period=\"year\""),
                 rain,
                 timestamp,
             );
@@ -497,7 +497,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum1 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 1\""),
+                format!("{station}, device=\"soil humidity 1\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -506,7 +506,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum2 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 2\""),
+                format!("{station}, device=\"soil humidity 2\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -515,7 +515,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum3 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 3\""),
+                format!("{station}, device=\"soil humidity 3\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -524,7 +524,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum4 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 4\""),
+                format!("{station}, device=\"soil humidity 4\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -533,7 +533,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum5 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 5\""),
+                format!("{station}, device=\"soil humidity 5\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -542,7 +542,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum6 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 6\""),
+                format!("{station}, device=\"soil humidity 6\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -551,7 +551,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum7 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 7\""),
+                format!("{station}, device=\"soil humidity 7\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -560,7 +560,7 @@ impl From<&Report> for Metrics {
         if let Some(humidity) = report.soilhum8 {
             metrics.gauge(
                 "soil_humidity",
-                format!("{station}, sensor=\"soil humidity 8\""),
+                format!("{station}, device=\"soil humidity 8\""),
                 humidity / 100.0,
                 timestamp,
             );
@@ -569,7 +569,7 @@ impl From<&Report> for Metrics {
         if let Some(solar_radiation) = report.solarradiation {
             metrics.gauge(
                 "solar_radiation",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}"),
                 solar_radiation,
                 timestamp,
             );
@@ -578,7 +578,7 @@ impl From<&Report> for Metrics {
         if let Some(speed) = report.windspeedmph {
             metrics.gauge(
                 "wind_mph",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}, period=\"instant\""),
                 speed,
                 timestamp,
             );
@@ -586,8 +586,8 @@ impl From<&Report> for Metrics {
 
         if let Some(speed) = report.windspdmph_avg10m {
             metrics.gauge(
-                "wind_average_10m_mph",
-                format!("{station}, sensor=\"weather station\""),
+                "wind_mph",
+                format!("{station}, period=\"10m average\""),
                 speed,
                 timestamp,
             );
@@ -596,7 +596,7 @@ impl From<&Report> for Metrics {
         if let Some(temperature) = report.pm_in_temp_aqin {
             metrics.gauge(
                 "temperature_fahrenheit",
-                format!("{station}, sensor=\"indoor PM2.5\""),
+                format!("{station}, location=\"indoor AQIN\""),
                 temperature,
                 timestamp,
             );
@@ -605,7 +605,7 @@ impl From<&Report> for Metrics {
         if let Some(temperature) = report.tempf {
             metrics.gauge(
                 "temperature_fahrenheit",
-                format!("{station}, sensor=\"weather station\""),
+                format!("{station}, location=\"outdoor\""),
                 temperature,
                 timestamp,
             );
@@ -614,19 +614,14 @@ impl From<&Report> for Metrics {
         if let Some(temperature) = report.tempinf {
             metrics.gauge(
                 "temperature_fahrenheit",
-                format!("{station}, sensor=\"indoor\""),
+                format!("{station}, location=\"indoor\""),
                 temperature,
                 timestamp,
             );
         }
 
         if let Some(uv) = report.uv {
-            metrics.gauge(
-                "uv_index",
-                format!("{station}, sensor=\"weather station\""),
-                uv,
-                timestamp,
-            );
+            metrics.gauge("uv_index", format!("{station}"), uv, timestamp);
         }
 
         metrics
