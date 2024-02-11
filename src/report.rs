@@ -230,6 +230,18 @@ impl TryFrom<&AmbientWeatherReport> for Report {
     }
 }
 
+impl PartialEq for Report {
+    fn eq(&self, other: &Self) -> bool {
+        self.time == other.time
+    }
+}
+
+impl PartialOrd for Report {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.time.partial_cmp(&other.time)
+    }
+}
+
 const TIME_FORMAT: &'static [FormatItem<'static>] =
     format_description!("[year]-[month]-[day] [hour]:[minute]:[second]");
 

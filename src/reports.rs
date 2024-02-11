@@ -113,7 +113,7 @@ impl Reports {
             };
 
             if let Some(gauges) = gauge_map.get_mut(&descriptor.name().to_string()) {
-                gauges.sort_by_cached_key(|gauge| gauge.metric().clone());
+                gauges.sort();
 
                 for gauge in gauges {
                     encoder.encode_gauge(gauge)?;
