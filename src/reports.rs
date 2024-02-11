@@ -27,6 +27,11 @@ impl Reports {
             ),
             Descriptor::gauge("weather_battery", "Battery state", "boolean"),
             Descriptor::gauge("weather_co2_ppm", "CO₂ concentration", "ppm"),
+            Descriptor::gauge(
+                "weather_dew_point_fahrenheit",
+                "Dew point",
+                "degrees fahrenheit",
+            ),
             Descriptor::gauge("weather_wind_degrees", "Wind direction", "degrees"),
             Descriptor::gauge("weather_wind_gust_mph", "Wind gust", "mph"),
             Descriptor::gauge("weather_humidity_relative", "Relative humidity", "percent"),

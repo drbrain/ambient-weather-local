@@ -14,3 +14,7 @@ serde = { version = "1", features = [ "derive" ] }
 time = { version = "0.3", features = [ "parsing", "serde" ] }
 tracing = "0.1"
 tracing-actix-web = "0.7"
+
+[dev-dependencies]
+assert_float_eq = "1.1"
+rstest = { version = "0.18", default-features = false }

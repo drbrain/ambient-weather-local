@@ -74,6 +74,45 @@ pub struct Report {
     pub yearlyrainin: Option<f64>,
 }
 
+impl Report {
+    pub fn dew_point_f(&self) -> Option<f64> {
+        let Some(temperature_f) = self.tempf else {
+            return None;
+        };
+
+        let Some(relative_humidity) = self.humidity else {
+            return None;
+        };
+
+        let temperature_c = f_to_c(temperature_f);
+
+        let dew_point = dew_point(temperature_c, relative_humidity);
+
+        Some(c_to_f(dew_point))
+    }
+}
+
+fn c_to_f(temperature: f64) -> f64 {
+    (temperature * 1.8) + 32.0
+}
+
+fn f_to_c(temperature: f64) -> f64 {
+    (temperature - 32.0) / 1.8
+}
+
+// https://www.weather.gov/media/epz/wxcalc/rhTdFromWetBulb.pdf
+const B: f64 = 17.67;
+const C: f64 = 234.5;
+
+fn dew_point(temperature: f64, relative_humidity: f64) -> f64 {
+    let gamma = gamma(temperature, relative_humidity);
+    C * gamma / (B - gamma)
+}
+
+fn gamma(temperature: f64, relative_humidity: f64) -> f64 {
+    (relative_humidity / 100.0).ln() + (B * temperature) / (C + temperature)
+}
+
 impl TryFrom<AmbientWeatherReport> for Report {
     type Error = time::error::Parse;
 
@@ -253,6 +292,8 @@ fn try_into_time(dateutc: &str) -> Result<OffsetDateTime, time::error::Parse> {
 
 #[cfg(test)]
 mod test {
+    use assert_float_eq::*;
+    use rstest::rstest;
     use time::{Date, Month, OffsetDateTime, Time};
 
     #[test]
@@ -264,5 +305,25 @@ mod test {
         let parsed = super::try_into_time("2024-01-02 03:04:05").expect("failed to parse time");
 
         assert_eq!(expected, parsed);
+    }
+
+    #[rstest]
+    #[case(35.5, 10.0, 0.3)]
+    #[case(40.0, 10.0, 3.7)]
+    #[case(10.0, 50.0, 0.4)]
+    #[case(25.0, 50.0, 14.2)]
+    #[case(40.0, 50.0, 27.9)]
+    #[case(2.0, 90.0, 0.6)]
+    #[case(21.0, 90.0, 19.4)]
+    #[case(40.0, 90.0, 38.1)]
+    fn dew_point(
+        #[case] temperature_c: f64,
+        #[case] relative_humidity: f64,
+        #[case] expected: f64,
+    ) {
+        let dew_point = super::dew_point(temperature_c, relative_humidity);
+        eprintln!("T: {temperature_c} RH: {relative_humidity} DP: {dew_point}");
+
+        assert_float_relative_eq!(expected, dew_point, 0.1);
     }
 }

@@ -314,6 +314,15 @@ impl From<&Report> for Metrics {
             );
         }
 
+        if let Some(dew_point) = report.dew_point_f() {
+            metrics.gauge(
+                "weather_dew_point_fahrenheit",
+                format!("{station}, location=\"outdoor\""),
+                dew_point,
+                timestamp,
+            );
+        }
+
         if let Some(direction) = report.winddir {
             metrics.gauge(
                 "weather_wind_degrees",
